@@ -1,28 +1,43 @@
 const express = require("express");
 const app = express();
+const morgan = require("morgan");
+const assert = require("assert");
 const Ticket = require("./mongo.js");
 
 app.use(express.static("client/build"));
 app.use(express.json());
 
-app.get('/api/tickets', async (request, response, next) => {
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
+
+app.get('/api/tickets', (request, response, next) => {
     const { searchText } = request.query;
-    const allTickets = await Ticket.find({ title: { $regex: searchText, $options: "i" } });
-
-
-    return response.json(allTickets);
+    Ticket.find({ title: { $regex: searchText || '', $options: 'i' } })
+        .then(allTickets => {
+            return response.json(allTickets);
+        })
+        .catch(err => next(err));
 });
 
-app.patch('/api/tickets/:ticketId', async (request, response, next) => {
-
-    return response.json({ updated: true })
-});
-
-app.patch('/api/tickets/:ticketId', async (request, response, next) => {
+app.patch('/api/tickets/:ticketId/done', async (request, response, next) => {
     const { ticketId } = request.params;
-    const ticketToUpdate = Ticket.findOneAndUpdate({ _id: ticketId }, { done: true })
-    console.log(ticketToUpdate);
-    return response.json({ updated: true })
+    try {
+        const updatedTicket = await Ticket.findByIdAndUpdate(ticketId, { done: true }, { new: true })
+        return response.json({ updated: true })
+    }
+    catch (error) {
+        return next(error);
+    }
+});
+
+app.patch('/api/tickets/:ticketId/undone', async (request, response, next) => {
+    try {
+        const { ticketId } = request.params;
+        const updatedTicket = await Ticket.findByIdAndUpdate(ticketId, { done: false }, { new: true })
+        return response.json({ updated: true })
+    }
+    catch (error) {
+        return next(error);
+    }
 });
 
 const errorHandler = (error, request, response, next) => {
@@ -31,7 +46,8 @@ const errorHandler = (error, request, response, next) => {
 }
 
 const lastRoute = (request, response, next) => {
-    console.log("request missed all routes, the path was: ", request.path);
+    console.log("request missed all routes");
+    return response.status(404).send("not found");
 }
 app.use(lastRoute);
 app.use(errorHandler);
