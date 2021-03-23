@@ -16,7 +16,7 @@ mongoose
   .then(() => {
     console.log(`connected to MongoDB - ${env}`);
     app.listen(PORT, () =>
-      console.log(`app listening at http://localhost:${PORT}`)
+      console.log(`app listening at port ${PORT}`)
     );
   })
   .catch((error) => {
