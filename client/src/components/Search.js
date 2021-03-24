@@ -12,7 +12,7 @@ function Search({ restoreHiddenTickets, hiddenTickets, tickets, setTickets, filt
         if (hiddenTickets.length === 0) {
             return "";
         }
-        return (<><p >There are <span id="hideTicketsCounter">{hiddenTickets.length}</span> hidden tickets</p>
+        return (<><p >There are <span className="hideTicketsCounter">{hiddenTickets.length}</span> hidden tickets</p>
             <button id="restoreHideTickets" value="restore" onClick={restoreHiddenTickets}></button></>);
     }
     return (
