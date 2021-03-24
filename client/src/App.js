@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import randomColor from 'randomcolor';
 import Search from './components/Search.js'
 import "./App.css";
 
@@ -7,6 +8,11 @@ function App() {
   const [serverErrorPage, setServerErrorPage] = useState(false);
   const [ticketsState, setTickets] = useState([]);
   const [hiddenTickets, setHiddenTickets] = useState([]);
+  const [labelBackgroundColors, setlabelBackgroundColors] = useState([]);
+
+  useEffect(() => {
+
+  }, [labelBackgroundColors])
   useEffect(() => {
     axios.get('/api/tickets')
       .then(({ data: allTickets }) => {
@@ -14,6 +20,14 @@ function App() {
       })
       .catch(err => {
         return setServerErrorPage(true)
+      })
+    axios.get('/api/labels')
+      .then(({ data: allLabels }) => {
+        console.log(allLabels);
+        setlabelBackgroundColors(allLabels);
+      })
+      .catch(err => {
+        return console.log("bla");
       })
   }, [])
 
@@ -46,6 +60,37 @@ function App() {
     return setHiddenTickets([]);
   }
 
+  const getLabelsElements = (labels) => {
+    if (!labels) {
+      return "";
+    }
+    return labels.map((label, index) => {
+      return (
+        <span key={index} className="label" style={{ backgroundColor: getLabelBackroundColor(label) }}>{label}</span>
+      );
+    });
+  }
+
+  const getLabelBackroundColor = (label) => {
+    const labelExist = labelBackgroundColors.filter(labelObject => {
+      return labelObject.name === label;
+    })
+    if (labelExist[0]) {
+      return labelExist[0].color;
+    }
+    const newLabel = {
+      name: label,
+      color: randomColor()
+    };
+    labelBackgroundColors.push(newLabel);
+    setlabelBackgroundColors([...labelBackgroundColors]);
+    try {
+      axios.post('/api/labels/new', newLabel);
+    }
+    catch (error) { console.log("error uploading label to db: ", error); }
+    return newLabel.color;
+  }
+
   if (serverErrorPage) {
     return (
       <div id="server-error">
@@ -63,7 +108,7 @@ function App() {
   return (
     <div className="App">
       <h1 className="title">Your Ticket Manager</h1>
-      <Search tickets={ticketsState} setTickets={setTickets} filterTickets={filterTickets} hideTicket={hideTicket} hiddenTickets={hiddenTickets} restoreHiddenTickets={restoreHiddenTickets} />
+      <Search tickets={ticketsState} setTickets={setTickets} filterTickets={filterTickets} hideTicket={hideTicket} hiddenTickets={hiddenTickets} restoreHiddenTickets={restoreHiddenTickets} getLabelsElements={getLabelsElements} />
     </div>
   );
 }
