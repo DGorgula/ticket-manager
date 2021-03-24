@@ -1,6 +1,4 @@
 
-
-
 function Ticket({ id, hiddenTickets, hideTicket, title, content, userEmail, creationTime, labels }) {
     const labelsElements = () => {
         if (labels) {

@@ -18,9 +18,6 @@ function App() {
   }, [])
 
   const filterTickets = (target) => {
-    // if (target.charCode !== 13) {
-    //   return;
-    // }
     const inputValue = target.target.value;
     axios.get(`/api/tickets?searchText=${inputValue}`)
       .then(({ data: filteredTickets }) => {
@@ -53,6 +50,7 @@ function App() {
     return (
       <div id="server-error">
         <p>There is a problem with our server.</p>
+        <img src="./assets/server-down-foxy.jpg" />
       </div>
     )
   }

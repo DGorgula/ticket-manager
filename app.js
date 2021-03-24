@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
-// const assert = require("assert");
 const Ticket = require("./mongo.js");
 
 // app.use(express.static("client/build"));

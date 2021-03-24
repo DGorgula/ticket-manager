@@ -25,19 +25,7 @@ const ticketSchema = mongoose.Schema({
     labels: {
         type: Array,
         required: true
-    },
-    hidden: {
-        type: Boolean,
-        default: false
     }
 })
-
-// ticketSchema.set('toJSON', {
-//     transform: (document, returnedObject) => {
-//         // returnedObject._id = returnedObject.id;
-//         // delete returnedObject.id;
-//         // return;
-//     }
-// })
 
 module.exports = mongoose.model('Ticket', ticketSchema)
