@@ -1,7 +1,7 @@
 import React from 'react'
 import Ticket from './Ticket.js'
 
-function Search({ tickets, setTickets }) {
+function Search({ tickets, setTickets, filterTickets }) {
     console.log(tickets);
     const ticketElements = tickets.map((ticket, index) => {
         return (
@@ -9,11 +9,14 @@ function Search({ tickets, setTickets }) {
         )
     })
 
+
     return (
-        <div className="search-container">
-            <input id="searchInput" type="text" placeholder="Search" />
+        // <div className="search-container">
+        <>
+            <input id="searchInput" type="text" placeholder="Search" onChange={filterTickets} />
             {ticketElements}
-        </div>
+        </>
+        // </div>
     )
 }
 

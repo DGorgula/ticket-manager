@@ -12,10 +12,26 @@ function App() {
       });
   }, [])
 
+  const filterTickets = (target) => {
+    // if (target.charCode !== 13) {
+    //   return;
+    // }
+    const inputValue = target.target.value;
+    axios.get(`/api/tickets?searchText=${inputValue}`)
+      .then(({ data: filteredTickets }) => {
+
+        if ("error" in filteredTickets) {
+          console.log("there was an error");
+          return;
+        }
+        return setTickets(filteredTickets)
+      })
+      .catch(err => console.log(err))
+  }
   return (
     <div className="App">
       <h1 className="title">Your Ticket Manager</h1>
-      <Search tickets={ticketsState} setTickets={setTickets} />
+      <Search tickets={ticketsState} setTickets={setTickets} filterTickets={filterTickets} />
     </div>
   );
 }
