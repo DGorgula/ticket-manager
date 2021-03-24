@@ -31,21 +31,6 @@ const mockData = [
   },
 ]
 
-mockLabels = [
-  {
-    "_id": "605b8b22d0f0a4e95142f6c2",
-    "name": "Api",
-    "color": "#e06da1",
-    "__v": 0
-  },
-  {
-    "_id": "605b8b22d0f0a4e95142f6c1",
-    "name": "Corvid",
-    "color": "#5fdd5d",
-    "__v": 0
-  },
-]
-
 let page;
 let browser;
 let encoder;
