@@ -1,13 +1,18 @@
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
-const assert = require("assert");
+// const assert = require("assert");
 const Ticket = require("./mongo.js");
 
-app.use(express.static("client/build"));
+// app.use(express.static("client/build"));
+app.use(express.static("client/public"));
 app.use(express.json());
 
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
+
+app.get('/', (request, response, next) => {
+    response.sendFile('index.html');
+})
 
 app.get('/api/tickets', (request, response, next) => {
     const { searchText } = request.query;
