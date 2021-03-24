@@ -49,13 +49,13 @@ function App() {
     return setHiddenTickets([]);
   }
 
-  // if (serverErrorPage) {
-  //   return (
-  //     <div id="server-error">
-  //       <p>There is a problem with our server.</p>
-  //     </div>
-  //   )
-  // }
+  if (serverErrorPage) {
+    return (
+      <div id="server-error">
+        <p>There is a problem with our server.</p>
+      </div>
+    )
+  }
   return (
     <div className="App">
       <h1 className="title">Your Ticket Manager</h1>
