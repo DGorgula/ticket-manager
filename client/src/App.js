@@ -27,7 +27,7 @@ function App() {
         setlabelBackgroundColors(allLabels);
       })
       .catch(err => {
-        return console.log("bla");
+        return console.log("error to load label");
       })
   }, [])
 
