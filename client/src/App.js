@@ -49,8 +49,14 @@ function App() {
   if (serverErrorPage) {
     return (
       <div id="server-error">
-        <p>There is a problem with our server.</p>
-        <img src="./assets/server-down-foxy.jpg" />
+        <div id="server-error-text">
+          <h3 id="server-error-title">Oopsy Daisy...</h3>
+          <p>There is a problem with our server.</p>
+        </div>
+        <div id="server-error-images">
+          <img id="zzz" src="./assets/zzz.png" />
+          <img id="foxy" src="./assets/server-down-foxy.png" />
+        </div>
       </div>
     )
   }

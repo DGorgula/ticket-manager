@@ -1,0 +1,44 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#server-error{
+    background-color:rgb(210, 226, 255);
+    height: 100vh;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+
+    #server-error-text{
+        width: 40vw;
+        height: fit-content;
+        #server-error-title{
+            font-size: 3rem;
+            margin-bottom: 2rem;
+        }
+        p {
+            font-size: 1.5rem;
+            
+        }
+    }
+    #server-error-images{
+        position: relative;
+        display:flex;
+        flex-direction: row-reverse;
+        height: fit-content;
+        #foxy {
+            scale: 0.75;
+        }
+        #zzz{
+            position: absolute;
+            scale: 0.6;
+            z-index: 1;
+            margin-top: -9rem;
+            margin-right: -5rem;
+            transform: rotate(10deg);
+        }
+    }
+    
+}
