@@ -22,7 +22,7 @@ function Search({ restoreHiddenTickets, hiddenTickets, tickets, setTickets, filt
             {showHiddenTicketsCounter()}
             {ticketElements}
         </>
-        // </div>
+        // </div> 
     )
 }
 
