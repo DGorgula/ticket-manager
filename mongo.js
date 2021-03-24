@@ -26,6 +26,17 @@ const ticketSchema = mongoose.Schema({
         type: Array,
         required: true
     }
-})
-
-module.exports = mongoose.model('Ticket', ticketSchema)
+});
+const labelSchema = mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    color: {
+        type: String,
+        required: true
+    }
+});
+const Ticket = mongoose.model('Ticket', ticketSchema);
+const Label = mongoose.model('Label', labelSchema);
+module.exports = { Ticket, Label };

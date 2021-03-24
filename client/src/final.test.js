@@ -31,6 +31,21 @@ const mockData = [
   },
 ]
 
+mockLabels = [
+  {
+    "_id": "605b8b22d0f0a4e95142f6c2",
+    "name": "Api",
+    "color": "#e06da1",
+    "__v": 0
+  },
+  {
+    "_id": "605b8b22d0f0a4e95142f6c1",
+    "name": "Corvid",
+    "color": "#5fdd5d",
+    "__v": 0
+  },
+]
+
 let page;
 let browser;
 let encoder;
@@ -39,7 +54,10 @@ jest.setTimeout(30000);
 const projectName = '1.Ticket Manager UI';
 describe(projectName, () => {
   beforeAll(async () => {
-    browser = await puppeteer.launch();
+    browser = await puppeteer.launch({
+      headless: false,
+      slowMo: 60
+    });
     page = await browser.newPage();
     useNock(page, ['http://localhost:3000/api']);
 

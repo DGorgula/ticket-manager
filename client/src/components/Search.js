@@ -1,11 +1,11 @@
 import React from 'react'
 import Ticket from './Ticket.js'
 
-function Search({ restoreHiddenTickets, hiddenTickets, tickets, setTickets, filterTickets, hideTicket }) {
+function Search({ getLabelsElements, restoreHiddenTickets, hiddenTickets, tickets, setTickets, filterTickets, hideTicket }) {
     console.log(tickets);
     const ticketElements = tickets.map((ticket, index) => {
         return (
-            <Ticket key={index} id={ticket._id || ticket.id} title={ticket.title} content={ticket.content} userEmail={ticket.userEmail} creationTime={ticket.creationTime} labels={ticket.labels} hideTicket={hideTicket} hiddenTickets={hiddenTickets} />
+            <Ticket key={index} id={ticket._id || ticket.id} title={ticket.title} getLabelsElements={getLabelsElements} content={ticket.content} userEmail={ticket.userEmail} creationTime={ticket.creationTime} labels={ticket.labels} hideTicket={hideTicket} hiddenTickets={hiddenTickets} />
         )
     });
     const showHiddenTicketsCounter = () => {

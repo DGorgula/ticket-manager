@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
-const Ticket = require("./mongo.js");
+const { Ticket, Label } = require("./mongo.js");
 
 // app.use(express.static("client/build"));
 app.use(express.static("client/public"));
@@ -45,6 +45,39 @@ app.patch('/api/tickets/:ticketId/undone', async (request, response, next) => {
         return next(error);
     }
 });
+
+app.post('/api/labels/new', async (request, response, next) => {
+    const { name, color } = request.body;
+    console.log("LABELLLLLLLL: ", name, color);
+    try {
+        const label = new Label({
+            name: name,
+            color: color
+        })
+        await label.save();
+        return response.json({ updated: true })
+    }
+    catch (err) { return next(err) }
+
+})
+
+app.get('/api/labels', async (request, response, next) => {
+    try {
+        const labels = await Label.find();
+        response.json(labels);
+    }
+    catch (err) { return next(err) }
+});
+
+app.delete('/api/labels', async (request, response, next) => {
+    try {
+
+        const deleted = await Label.deleteMany({}, { new: true });
+        return response.json({ deleted: detected.deletedCount })
+    }
+    catch (err) { return next(err) }
+});
+
 
 const errorHandler = (error, request, response, next) => {
     console.log("error handler output: ", error);
