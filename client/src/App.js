@@ -1,23 +1,21 @@
-import logo from "./logo.svg";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Search from './components/Search.js'
 import "./App.css";
 
 function App() {
+  const [ticketsState, setTickets] = useState([]);
+  useEffect(() => {
+    axios.get('/api/tickets')
+      .then(({ data: allTickets }) => {
+        setTickets(allTickets);
+      });
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1 className="title">Your Ticket Manager</h1>
+      <Search tickets={ticketsState} setTickets={setTickets} />
     </div>
   );
 }
