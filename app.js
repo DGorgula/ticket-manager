@@ -18,6 +18,8 @@ app.get('/api/tickets', (request, response, next) => {
     const { searchText } = request.query;
     Ticket.find({ title: { $regex: searchText || '', $options: 'i' } })
         .then(allTickets => {
+            allTickets.map((ticket) => {
+            })
             return response.json(allTickets);
         })
         .catch(err => next(err));
