@@ -3,8 +3,8 @@ const app = express();
 const morgan = require("morgan");
 const { Ticket, Label } = require("./mongo.js");
 
-// app.use(express.static("client/build"));
-app.use(express.static("client/public"));
+app.use(express.static("client/build"));
+
 app.use(express.json());
 
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
