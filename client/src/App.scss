@@ -1,9 +1,20 @@
 *{
     margin: 0;
     padding: 0;
-    border-box: 
+    box-sizing: border-box;
+    // width: 10;
 }
 
+.App{
+    background-color: rgb(210, 226, 255);
+    text-align: center;
+    // width: 100vw;
+}
+
+.title{
+    font-size: 3rem;
+    padding: 2rem 0;
+}
 #server-error{
     background-color:rgb(210, 226, 255);
     height: 100vh;
@@ -36,7 +47,6 @@
         #zzz{
             position: absolute;
             scale: 0.6;
-            z-index: 1;
             margin-top: -9rem;
             margin-right: -5rem;
             transform: rotate(10deg);

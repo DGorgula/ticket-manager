@@ -1,6 +1,18 @@
 * {
   margin: 0;
   padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.App {
+  background-color: #d2e2ff;
+  text-align: center;
+}
+
+.title {
+  font-size: 3rem;
+  padding: 2rem 0;
 }
 
 #server-error {
@@ -19,6 +31,8 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
 }
 
 #server-error #server-error-text {
@@ -58,7 +72,6 @@
 #server-error #server-error-images #zzz {
   position: absolute;
   scale: 0.6;
-  z-index: 1;
   margin-top: -9rem;
   margin-right: -5rem;
   -webkit-transform: rotate(10deg);

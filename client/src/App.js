@@ -9,10 +9,8 @@ function App() {
   const [ticketsState, setTickets] = useState([]);
   const [hiddenTickets, setHiddenTickets] = useState([]);
   const [labelBackgroundColors, setlabelBackgroundColors] = useState([]);
+  const [currentLabels, setCurrentLabels] = useState([]);
 
-  useEffect(() => {
-
-  }, [labelBackgroundColors])
   useEffect(() => {
     axios.get('/api/tickets')
       .then(({ data: allTickets }) => {
@@ -27,7 +25,7 @@ function App() {
         setlabelBackgroundColors(allLabels);
       })
       .catch(err => {
-        return console.log("error to load label");
+        return console.log("error to load labels");
       })
   }, [])
 
@@ -66,7 +64,7 @@ function App() {
     }
     return labels.map((label, index) => {
       return (
-        <span key={index} className="label" style={{ backgroundColor: getLabelBackroundColor(label) }}>{label}</span>
+        <span key={index} className="label" onClick={() => { setCurrentLabels(label); console.log(currentLabels) }} style={{ backgroundColor: getLabelBackroundColor(label) }}>{label}</span>
       );
     });
   }
@@ -91,6 +89,12 @@ function App() {
     return newLabel.color;
   }
 
+
+  const addToCurrentLabels = (label) => {
+    console.log(currentLabels);
+    currentLabels.push(label);
+    setCurrentLabels(currentLabels);
+  }
   if (serverErrorPage) {
     return (
       <div id="server-error">
@@ -105,6 +109,7 @@ function App() {
       </div>
     )
   }
+
   return (
     <div className="App">
       <h1 className="title">Your Ticket Manager</h1>
