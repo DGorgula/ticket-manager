@@ -11,6 +11,7 @@
     flex-direction: row-reverse;
     justify-content: center;
     align-items: center;
+    flex-wrap:nowrap;
 
     #server-error-text{
         width: 40vw;
