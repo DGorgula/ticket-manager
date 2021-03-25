@@ -11,9 +11,11 @@ function Ticket({ id, getLabelsElements, hiddenTickets, hideTicket, title, conte
     }
     const showMore = <span id="show" onClick={() => setContent(content)}> show more</span>;
     const showLess = <span id="show" onClick={() => setContent(shortContent)}> show less</span>;
+
     if (hiddenTickets.includes(id)) {
         return "";
     }
+
     return (
         <div className="ticket">
             <img className="hideTicketButton" src='./assets/hide.webp' onClick={() => hideTicket(id)} />

@@ -48,7 +48,6 @@ app.patch('/api/tickets/:ticketId/undone', async (request, response, next) => {
 
 app.post('/api/labels/new', async (request, response, next) => {
     const { name, color } = request.body;
-    console.log("LABELLLLLLLL: ", name, color);
     try {
         const label = new Label({
             name: name,
