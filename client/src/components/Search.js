@@ -1,8 +1,8 @@
-import React from 'react'
-import Ticket from './Ticket.js'
+import React from 'react';
+import Ticket from './Ticket.js';
+import '../styles/Search.css';
 
 function Search({ getLabelsElements, restoreHiddenTickets, hiddenTickets, tickets, setTickets, filterTickets, hideTicket }) {
-    console.log(tickets);
     const ticketElements = tickets.map((ticket, index) => {
         return (
             <Ticket key={index} id={ticket._id || ticket.id} title={ticket.title} getLabelsElements={getLabelsElements} content={ticket.content} userEmail={ticket.userEmail} creationTime={ticket.creationTime} labels={ticket.labels} hideTicket={hideTicket} hiddenTickets={hiddenTickets} />
@@ -12,17 +12,19 @@ function Search({ getLabelsElements, restoreHiddenTickets, hiddenTickets, ticket
         if (hiddenTickets.length === 0) {
             return "";
         }
-        return (<><p >There are <span id="hideTicketsCounter">{hiddenTickets.length}</span> hidden tickets</p>
-            <button id="restoreHideTickets" value="restore" onClick={restoreHiddenTickets}></button></>);
+        return (<p id="restore">There are <span id="hideTicketsCounter">{hiddenTickets.length}</span> hidden tickets
+            <span id="restoreHideTickets" onClick={restoreHiddenTickets}>restore</span>
+        </p>
+        );
     }
     return (
-        // <div className="search-container">
         <>
             <input id="searchInput" type="text" placeholder="Search" onChange={filterTickets} />
             {showHiddenTicketsCounter()}
-            {ticketElements}
+            <div id="tickets-container">
+                {ticketElements}
+            </div>
         </>
-        // </div> 
     )
 }
 

@@ -1,0 +1,31 @@
+#searchInput{
+    padding: 0.5rem;
+    border-radius: 1rem;
+    width:50vw;
+    // margin-bottom: 2rem;
+}
+#searchInput:focus {
+    outline: none;
+}
+
+#tickets-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 0 2rem;
+    margin-top: 4rem;
+}
+
+#restore{
+    margin-top: 1rem;
+}
+
+#restoreHideTickets{
+    margin-left: 0.5rem;
+    font-weight: bold;
+    font-size: 0.7rem;
+    color: #e27013;
+    background-color: black;
+    border-radius: 1rem;
+    padding:0.1rem 0.4rem;
+}
