@@ -46,6 +46,17 @@ app.patch('/api/tickets/:ticketId/undone', async (request, response, next) => {
     }
 });
 
+app.patch('/api/tickets/new-label', async (request, response, next) => {
+    try {
+        const { id, labels } = request.body;
+        const updatedTicket = await Ticket.findByIdAndUpdate(id, { labels: labels }, { new: true })
+        return response.json({ updated: true })
+    }
+    catch (error) {
+        return next(error);
+    }
+});
+
 app.post('/api/labels/new', async (request, response, next) => {
     const { name, color } = request.body;
     try {

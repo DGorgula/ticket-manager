@@ -17,6 +17,7 @@
     }
 }
 .ticket-labels {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     margin: 0.7rem -1rem 1rem -1rem;
@@ -29,6 +30,20 @@
     font-weight: bold;
     font-size: 0.6rem;
     margin-right: 0.2rem;
+}
+.label-adder{
+    border: 0.15rem dashed black;
+    vertical-align: middle;
+    text-align:center;
+    border-radius: 0.3rem;
+    width: 1rem;
+    height: 1rem;
+    opacity: 0.5;
+}
+.label-adder-input{
+position: absolute;
+width:6rem;
+box-shadow: -6px 4px 12px -3px rgba(0,0,0,0.29);
 }
 
 .user-email{

@@ -90,10 +90,12 @@ function App() {
   }
 
 
-  const addToCurrentLabels = (label) => {
-    console.log(currentLabels);
-    currentLabels.push(label);
-    setCurrentLabels(currentLabels);
+  const addToCurrentLabels = (label, labels, id) => {
+    labels.push(label)
+    axios.patch('/api/tickets/new-label', { labels: labels, id: id }).then(() => {
+      setTickets([...ticketsState]);
+
+    });
   }
   if (serverErrorPage) {
     return (
@@ -114,7 +116,7 @@ function App() {
     <>
       <div className="App">
         <h1 className="title">Your Ticket Manager</h1>
-        <Search tickets={ticketsState} setTickets={setTickets} filterTickets={filterTickets} hideTicket={hideTicket} hiddenTickets={hiddenTickets} restoreHiddenTickets={restoreHiddenTickets} getLabelsElements={getLabelsElements} />
+        <Search tickets={ticketsState} setTickets={setTickets} filterTickets={filterTickets} hideTicket={hideTicket} hiddenTickets={hiddenTickets} restoreHiddenTickets={restoreHiddenTickets} getLabelsElements={getLabelsElements} addToCurrentLabels={addToCurrentLabels} />
       </div>
       <div id="oopsy-loader">
         <img id="zzz-loader" src="./assets/zzz.png" />
