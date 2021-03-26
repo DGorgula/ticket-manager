@@ -7,6 +7,7 @@
 .App{
     background-color: rgb(210, 226, 255);
     text-align: center;
+    z-index:1;
 }
 
 .title{
@@ -21,6 +22,7 @@
     justify-content: center;
     align-items: center;
     flex-wrap:nowrap;
+    z-index: 1;
 
     #server-error-text{
         width: 40vw;
@@ -51,4 +53,22 @@
         }
     }
     
+}
+
+
+#oopsy-loader {
+    // background-color: rgb(17, 82, 204);
+    width: 0.1rem;
+    height: 0.1rem;
+    position: absolute;
+    #foxy-loader {
+        scale: 0.0001;
+        
+    }
+    #zzz-loader {
+        scale: 0.0001;
+        margin-top: -9rem;
+        margin-right: -5rem;
+        transform: rotate(10deg);
+    }
 }

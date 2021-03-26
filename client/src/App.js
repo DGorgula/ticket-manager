@@ -111,10 +111,16 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <h1 className="title">Your Ticket Manager</h1>
-      <Search tickets={ticketsState} setTickets={setTickets} filterTickets={filterTickets} hideTicket={hideTicket} hiddenTickets={hiddenTickets} restoreHiddenTickets={restoreHiddenTickets} getLabelsElements={getLabelsElements} />
-    </div>
+    <>
+      <div className="App">
+        <h1 className="title">Your Ticket Manager</h1>
+        <Search tickets={ticketsState} setTickets={setTickets} filterTickets={filterTickets} hideTicket={hideTicket} hiddenTickets={hiddenTickets} restoreHiddenTickets={restoreHiddenTickets} getLabelsElements={getLabelsElements} />
+      </div>
+      <div id="oopsy-loader">
+        <img id="zzz-loader" src="./assets/zzz.png" />
+        <img id="foxy-loader" src="./assets/server-down-foxy.png" />
+      </div>
+    </>
   );
 }
 
