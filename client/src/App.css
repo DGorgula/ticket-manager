@@ -87,14 +87,16 @@
 }
 
 #oopsy-loader #foxy-loader {
-  scale: 0.0001;
+  -webkit-transform: scale(0.0001);
+          transform: scale(0.0001);
 }
 
 #oopsy-loader #zzz-loader {
-  scale: 0.0001;
   margin-top: -9rem;
   margin-right: -5rem;
   -webkit-transform: rotate(10deg);
           transform: rotate(10deg);
+  -webkit-transform: scale(0.0001);
+          transform: scale(0.0001);
 }
 /*# sourceMappingURL=App.css.map */
