@@ -8,7 +8,7 @@ function App() {
   const [serverErrorPage, setServerErrorPage] = useState(false);
   const [ticketsState, setTickets] = useState([]);
   const [hiddenTickets, setHiddenTickets] = useState([]);
-  const [labelBackgroundColors, setlabelBackgroundColors] = useState([]);
+  const [labelObjectList, setlabelObjectList] = useState([]);
   const [currentLabels, setCurrentLabels] = useState([]);
 
   useEffect(() => {
@@ -20,9 +20,9 @@ function App() {
         return setServerErrorPage(true)
       })
     axios.get('/api/labels')
-      .then(({ data: allLabels }) => {
-        console.log(allLabels);
-        setlabelBackgroundColors(allLabels);
+      .then(({ data: allLabelObjects }) => {
+        console.log(allLabelObjects);
+        setlabelObjectList(allLabelObjects);
       })
       .catch(err => {
         return console.log("error to load labels");
@@ -64,13 +64,13 @@ function App() {
     }
     return labels.map((label, index) => {
       return (
-        <span key={index} className="label" onClick={() => { setCurrentLabels(label); console.log(currentLabels) }} style={{ backgroundColor: getLabelBackroundColor(label) }}>{label}</span>
+        <span key={index} className="label" onClick={() => { setCurrentLabels([...currentLabels, label]); console.log(currentLabels) }} style={{ backgroundColor: getLabelBackroundColor(label) }}>{label}</span>
       );
     });
   }
 
   const getLabelBackroundColor = (label) => {
-    const labelExist = labelBackgroundColors.filter(labelObject => {
+    const labelExist = labelObjectList.filter(labelObject => {
       return labelObject.name === label;
     })
     if (labelExist[0]) {
@@ -80,8 +80,8 @@ function App() {
       name: label,
       color: randomColor()
     };
-    labelBackgroundColors.push(newLabel);
-    setlabelBackgroundColors([...labelBackgroundColors]);
+    labelObjectList.push(newLabel);
+    setlabelObjectList([...labelObjectList]);
     try {
       axios.post('/api/labels/new', newLabel);
     }
@@ -91,11 +91,16 @@ function App() {
 
 
   const addToCurrentLabels = (label, labels, id) => {
-    labels.push(label)
-    axios.patch('/api/tickets/new-label', { labels: labels, id: id }).then(() => {
+    axios.patch('/api/tickets/new-label', { labels: labels, id: id }).then(({ data: response }) => {
+      if (response.label) {
+        labels.push(response.label)
+        setTickets([...ticketsState]);
+        return;
+      }
+      labels.push(label)
       setTickets([...ticketsState]);
-
-    });
+      return;
+    }).catch((err) => { console.log("error updating new label"); })
   }
   if (serverErrorPage) {
     return (
@@ -116,7 +121,7 @@ function App() {
     <>
       <div className="App">
         <h1 className="title">Your Ticket Manager</h1>
-        <Search tickets={ticketsState} setTickets={setTickets} filterTickets={filterTickets} hideTicket={hideTicket} hiddenTickets={hiddenTickets} restoreHiddenTickets={restoreHiddenTickets} getLabelsElements={getLabelsElements} addToCurrentLabels={addToCurrentLabels} />
+        <Search tickets={ticketsState} setTickets={setTickets} filterTickets={filterTickets} hideTicket={hideTicket} hiddenTickets={hiddenTickets} restoreHiddenTickets={restoreHiddenTickets} getLabelsElements={getLabelsElements} addToCurrentLabels={addToCurrentLabels} labelObjectList={labelObjectList} />
       </div>
       <div id="oopsy-loader">
         <img id="zzz-loader" src="./assets/zzz.png" />

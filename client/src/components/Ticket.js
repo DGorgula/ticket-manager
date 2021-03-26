@@ -26,7 +26,16 @@ function Ticket({ id, getLabelsElements, hiddenTickets, hideTicket, title, conte
 
     }
 
-
+    const ticketContentCreator = () => {
+        if (ticketContent === content) {
+            return (
+                <p className="ticket-content">{ticketContent}<br />{showLess}</p>
+            )
+        }
+        return (
+            <p className="ticket-content">{ticketContent} . . .<br />{showMore}</p>
+        )
+    }
 
 
     const showInput = (e) => {
@@ -36,7 +45,7 @@ function Ticket({ id, getLabelsElements, hiddenTickets, hideTicket, title, conte
         const parentLeft = parent.getBoundingClientRect().left;
         const parentTop = parent.getBoundingClientRect().top;
         console.log(parent);
-        setInput(< input className="label-adder-input" placeholder="add new label" onKeyPress={keyPressHandler} style={{ left: leftPosition - parentLeft + 10, top: topPosition - parentTop - 20 }} />)
+        setInput(< input className="label-adder-input" placeholder="add new label" autoFocus onBlur={() => setInput("")} onKeyPress={keyPressHandler} style={{ left: leftPosition - parentLeft + 10, top: topPosition - parentTop - 20 }} />)
     }
 
     return (
@@ -50,7 +59,7 @@ function Ticket({ id, getLabelsElements, hiddenTickets, hideTicket, title, conte
                 {input}
 
             </div>
-            <p className="ticket-content">{ticketContent}{ticketContent === content ? showLess : showMore}</p>
+            {ticketContentCreator()}
         </div>
     )
 
