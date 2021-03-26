@@ -37,6 +37,12 @@ const labelSchema = mongoose.Schema({
         required: true
     }
 });
+labelSchema.set("toJSON", {
+    transform: (document, returnedObject) => {
+        delete returnedObject.__v;
+        delete returnedObject._id;
+    },
+})
 const Ticket = mongoose.model('Ticket', ticketSchema);
 const Label = mongoose.model('Label', labelSchema);
 module.exports = { Ticket, Label };
