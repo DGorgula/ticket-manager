@@ -33,4 +33,18 @@
   border-radius: 1rem;
   padding: 0.1rem 0.4rem;
 }
+
+#label-list {
+  width: 80%;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin-top: 1rem;
+}
 /*# sourceMappingURL=Search.css.map */

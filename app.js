@@ -60,6 +60,10 @@ app.patch('/api/tickets/new-label', async (request, response, next) => {
 app.post('/api/labels/new', async (request, response, next) => {
     const { name, color } = request.body;
     try {
+        const labelExist = await Label.find({ name: name });
+        if (labelExist[0]) {
+            return response.json({ updated: false, label: labelExist });
+        }
         const label = new Label({
             name: name,
             color: color
