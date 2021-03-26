@@ -14,7 +14,8 @@ app.get('/', (request, response, next) => {
 })
 
 app.get('/api/tickets', (request, response, next) => {
-    const { searchText } = request.query;
+    const { searchText, labels } = request.query;
+    // if ()
     Ticket.find({ title: { $regex: searchText || '', $options: 'i' } })
         .then(allTickets => {
             allTickets.map((ticket) => {

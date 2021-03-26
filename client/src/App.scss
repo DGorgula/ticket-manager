@@ -62,13 +62,12 @@
     height: 0.1rem;
     position: absolute;
     #foxy-loader {
-        scale: 0.0001;
-        
+        transform: scale(.0001);
     }
     #zzz-loader {
-        scale: 0.0001;
         margin-top: -9rem;
         margin-right: -5rem;
         transform: rotate(10deg);
+        transform: scale(.0001);
     }
 }
