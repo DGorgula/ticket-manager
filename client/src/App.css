@@ -8,6 +8,7 @@
 .App {
   background-color: #d2e2ff;
   text-align: center;
+  z-index: 1;
 }
 
 .title {
@@ -33,6 +34,7 @@
           align-items: center;
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
+  z-index: 1;
 }
 
 #server-error #server-error-text {
@@ -72,6 +74,24 @@
 #server-error #server-error-images #zzz {
   position: absolute;
   scale: 0.6;
+  margin-top: -9rem;
+  margin-right: -5rem;
+  -webkit-transform: rotate(10deg);
+          transform: rotate(10deg);
+}
+
+#oopsy-loader {
+  width: 0.1rem;
+  height: 0.1rem;
+  position: absolute;
+}
+
+#oopsy-loader #foxy-loader {
+  scale: 0.0001;
+}
+
+#oopsy-loader #zzz-loader {
+  scale: 0.0001;
   margin-top: -9rem;
   margin-right: -5rem;
   -webkit-transform: rotate(10deg);
