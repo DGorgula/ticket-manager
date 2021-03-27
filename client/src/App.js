@@ -10,7 +10,7 @@ function App() {
   const [hiddenTickets, setHiddenTickets] = useState([]);
   const [labelObjectList, setlabelObjectList] = useState([]);
   const [currentLabels, setCurrentLabels] = useState([]);
-
+  // const [inputValueState, setInputValue] = useState("")
   useEffect(() => {
     axios.get('/api/tickets')
       .then(({ data: allTickets }) => {
@@ -31,6 +31,7 @@ function App() {
 
   const filterTickets = (target) => {
     const inputValue = target.target.value;
+    // setInputValue(inputValue);
     axios.get(`/api/tickets?searchText=${inputValue}`)
       .then(({ data: filteredTickets }) => {
         if ("error" in filteredTickets) {
@@ -90,7 +91,7 @@ function App() {
   }
 
 
-  const addToCurrentLabels = (label, labels, id) => {
+  const addNewLabel = (label, labels, id) => {
     axios.patch('/api/tickets/new-label', { labels: labels, id: id }).then(({ data: response }) => {
       if (response.label) {
         labels.push(response.label)
@@ -121,7 +122,7 @@ function App() {
     <>
       <div className="App">
         <h1 className="title">Your Ticket Manager</h1>
-        <Search tickets={ticketsState} setTickets={setTickets} filterTickets={filterTickets} hideTicket={hideTicket} hiddenTickets={hiddenTickets} restoreHiddenTickets={restoreHiddenTickets} getLabelsElements={getLabelsElements} addToCurrentLabels={addToCurrentLabels} labelObjectList={labelObjectList} />
+        <Search tickets={ticketsState} setTickets={setTickets} filterTickets={filterTickets} hideTicket={hideTicket} hiddenTickets={hiddenTickets} restoreHiddenTickets={restoreHiddenTickets} getLabelsElements={getLabelsElements} addNewLabel={addNewLabel} labelObjectList={labelObjectList} />
       </div>
       <div id="oopsy-loader">
         <img id="zzz-loader" src="./assets/zzz.png" />
