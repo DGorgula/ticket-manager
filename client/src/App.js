@@ -18,7 +18,11 @@ function App() {
         setlabelObjectList(allLabelObjects);
       })
       .catch(err => {
-        return console.log("error to load labels");
+        return
+        // if (condition) {
+
+        // }
+        console.log("error to load labels");
       })
   }, [])
 
