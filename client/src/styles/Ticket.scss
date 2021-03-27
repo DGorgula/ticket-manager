@@ -1,13 +1,23 @@
 .ticket {
     background-color: #e27013;
     position: relative;
-    width: 20rem;
+    width: fit-content;
     padding: 0.5rem 2rem 2rem 2rem;
     border-radius: 0.4rem;
     margin-bottom: 2rem;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content: space-around;
     .ticket-title {
+        width: 15rem;
         padding: 2rem 0 0 0;
-
+        word-wrap: break-word;
+    }
+    .ticket-content {
+        width: 15rem;
+        word-wrap: break-word;
+        // background-color: black;
     }
 }
 
@@ -18,9 +28,10 @@
 }
 .ticket-labels {
     position: relative;
+    width: 90%;
     display: flex;
     flex-wrap: wrap;
-    margin: 0.7rem -1rem 1rem -1rem;
+    // margin: 0.7rem -1rem 1rem -1rem;
 }
 
 .label {

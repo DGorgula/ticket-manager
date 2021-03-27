@@ -61,10 +61,16 @@
     width: 0.1rem;
     height: 0.1rem;
     position: absolute;
+    top: 0;
+    left: 0;
     #foxy-loader {
+        position: absolute;
+        left: 0;
         transform: scale(.0001);
     }
     #zzz-loader {
+        position: absolute;
+        left: 0;
         margin-top: -9rem;
         margin-right: -5rem;
         transform: rotate(10deg);
