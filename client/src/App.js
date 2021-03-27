@@ -12,13 +12,6 @@ function App() {
   const [currentLabels, setCurrentLabels] = useState([]);
   const [inputValueState, setInputValue] = useState("")
   useEffect(() => {
-    axios.get('/api/tickets')
-      .then(({ data: allTickets }) => {
-        setTickets(allTickets);
-      })
-      .catch(err => {
-        return setServerErrorPage(true)
-      })
     axios.get('/api/labels')
       .then(({ data: allLabelObjects }) => {
         console.log(allLabelObjects);
@@ -52,11 +45,7 @@ function App() {
       })
   }
   useEffect(() => {
-    console.log("working");
-    if (currentLabels[0]) {
-      console.log("working inside if");
-      filterTickets(null, inputValueState);
-    }
+    filterTickets(null, inputValueState);
   }, [currentLabels])
 
   const hideTicket = (ticketId) => {
@@ -73,13 +62,30 @@ function App() {
     return setHiddenTickets([]);
   }
 
-  const getLabelsElements = (labels) => {
+  const toggleLabelChoose = (label) => {
+    if (currentLabels.includes(label)) {
+      const labelIndex = currentLabels.indexOf(label);
+      currentLabels.splice(labelIndex, 1);
+      setCurrentLabels([...currentLabels])
+      return;
+    }
+    setCurrentLabels([...currentLabels, label])
+  }
+
+  const getLabelsElements = (labels, isTicketLabel) => {
     if (!labels) {
       return "";
     }
+    let chosenExist;
+    if (currentLabels[0]) {
+      chosenExist = true
+    }
     return labels.map((label, index) => {
+      const isChosen = currentLabels.includes(label);
+      const labelBackgroundColor = chosenExist ? (isChosen ? getLabelBackroundColor(label) : 'lightgray') : getLabelBackroundColor(label);
+
       return (
-        <span key={index} className="label" onClick={() => { setCurrentLabels([...currentLabels, label]); console.log(currentLabels) }} style={{ backgroundColor: getLabelBackroundColor(label) }}>{label}</span>
+        <span key={index} className={`label`} onClick={() => { toggleLabelChoose(label); console.log(currentLabels) }} style={{ backgroundColor: isTicketLabel ? getLabelBackroundColor(label) : labelBackgroundColor }}>{label}</span>
       );
     });
   }

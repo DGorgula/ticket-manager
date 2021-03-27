@@ -54,7 +54,7 @@ function Ticket({ id, getLabelsElements, hiddenTickets, hideTicket, title, conte
             <span className="creation-time">{prettifiedDate(creationTime)}</span>
             <h3 className="ticket-title">{title}</h3>
             <span className="user-email">{userEmail}</span>
-            <div className="ticket-labels">{getLabelsElements(labels)}
+            <div className="ticket-labels">{getLabelsElements(labels, true)}
                 <img className="label-adder" src="./assets/plus.png" onClick={showInput} />
                 {input}
 
