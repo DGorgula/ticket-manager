@@ -10,7 +10,7 @@ function App() {
   const [hiddenTickets, setHiddenTickets] = useState([]);
   const [labelObjectList, setlabelObjectList] = useState([]);
   const [currentLabels, setCurrentLabels] = useState([]);
-  // const [inputValueState, setInputValue] = useState("")
+  const [inputValueState, setInputValue] = useState("")
   useEffect(() => {
     axios.get('/api/tickets')
       .then(({ data: allTickets }) => {
@@ -29,10 +29,17 @@ function App() {
       })
   }, [])
 
-  const filterTickets = (target) => {
-    const inputValue = target.target.value;
-    // setInputValue(inputValue);
-    axios.get(`/api/tickets?searchText=${inputValue}`)
+
+  const filterTickets = (event, value) => {
+    let inputValue;
+    if (value != null) {
+      inputValue = value;
+    }
+    else {
+      inputValue = event.target.value;
+    }
+    setInputValue(inputValue);
+    axios.get(`/api/tickets?searchText=${inputValue}&labels=${currentLabels}`)
       .then(({ data: filteredTickets }) => {
         if ("error" in filteredTickets) {
           console.log("there was an error");
@@ -44,6 +51,13 @@ function App() {
         return setServerErrorPage(true)
       })
   }
+  useEffect(() => {
+    console.log("working");
+    if (currentLabels[0]) {
+      console.log("working inside if");
+      filterTickets(null, inputValueState);
+    }
+  }, [currentLabels])
 
   const hideTicket = (ticketId) => {
     console.log("giding a ticket", ticketId);
