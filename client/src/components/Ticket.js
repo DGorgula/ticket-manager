@@ -50,10 +50,12 @@ function Ticket({ id, getLabelsElements, hiddenTickets, hideTicket, title, conte
 
     return (
         <div className="ticket">
-            <img className="hideTicketButton" src='./assets/hide.webp' onClick={() => hideTicket(id)} />
-            <span className="creation-time">{prettifiedDate(creationTime)}</span>
-            <h3 className="ticket-title">{title}</h3>
-            <span className="user-email">{userEmail}</span>
+            <div className="ticket-header">
+                <img className="hideTicketButton" src='./assets/hide.webp' onClick={() => hideTicket(id)} />
+                <span className="creation-time">{prettifiedDate(creationTime)}</span>
+                <h3 className="ticket-title">{title}</h3>
+                <span className="user-email">{userEmail}</span>
+            </div>
             <div className="ticket-labels">{getLabelsElements(labels, true)}
                 <img className="label-adder" src="./assets/plus.png" onClick={showInput} />
                 {input}

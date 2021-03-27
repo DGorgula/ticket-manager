@@ -36,3 +36,14 @@
     flex-wrap: wrap;
     margin-top: 1rem;
 }
+@media (max-width:900px){
+    #searchInput{
+        width:75%;
+    }
+}
+
+@media (max-width:600px){
+    #searchInput{
+        width:90%;
+    }
+}
