@@ -9,14 +9,28 @@ app.use(express.json());
 
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
 
+app.use((request, response, next) => setTimeout(next, 300));
+
 app.get('/', (request, response, next) => {
     response.sendFile('index.html');
 })
 
 app.get('/api/tickets', (request, response, next) => {
-    const { searchText, labels } = request.query;
-    // if ()
-    Ticket.find({ title: { $regex: searchText || '', $options: 'i' } })
+    let { searchText, labels } = request.query;
+    labels = labels ? labels.slice(1, -1).split(', ') : [''];
+    console.log(Array.from(labels), typeof Array.from(labels));
+    const searchTextQuery = { title: { $regex: searchText || '', $options: 'i' } }
+    const complexQuery = {
+        title: {
+            $regex: searchText || '',
+            $options: 'i'
+        },
+        $or:
+            labels.map(label => {
+                return { labels: label }
+            })
+    }
+    Ticket.find(labels[0] !== '' ? complexQuery : searchTextQuery)
         .then(allTickets => {
             allTickets.map((ticket) => {
             })
