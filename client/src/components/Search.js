@@ -2,10 +2,10 @@ import React from 'react';
 import Ticket from './Ticket.js';
 import '../styles/Search.css';
 
-function Search({ getLabelsElements, restoreHiddenTickets, hiddenTickets, tickets, setTickets, filterTickets, hideTicket, addToCurrentLabels, labelObjectList }) {
+function Search({ getLabelsElements, restoreHiddenTickets, hiddenTickets, tickets, setTickets, filterTickets, hideTicket, addNewLabel, labelObjectList }) {
     const ticketElements = tickets.map((ticket, index) => {
         return (
-            <Ticket key={index} id={ticket._id || ticket.id} title={ticket.title} getLabelsElements={getLabelsElements} content={ticket.content} userEmail={ticket.userEmail} creationTime={ticket.creationTime} labels={ticket.labels} hideTicket={hideTicket} hiddenTickets={hiddenTickets} addToCurrentLabels={addToCurrentLabels} />
+            <Ticket key={index} id={ticket._id || ticket.id} title={ticket.title} getLabelsElements={getLabelsElements} content={ticket.content} userEmail={ticket.userEmail} creationTime={ticket.creationTime} labels={ticket.labels} hideTicket={hideTicket} hiddenTickets={hiddenTickets} addNewLabel={addNewLabel} />
         )
     });
     const showHiddenTicketsCounter = () => {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import '../styles/Ticket.css';
 
-function Ticket({ id, getLabelsElements, hiddenTickets, hideTicket, title, content, userEmail, creationTime, labels, addToCurrentLabels }) {
+function Ticket({ id, getLabelsElements, hiddenTickets, hideTicket, title, content, userEmail, creationTime, labels, addNewLabel }) {
     const shortContent = content.slice(0, 120);
     const [ticketContent, setContent] = useState(shortContent)
     const [input, setInput] = useState("")
@@ -20,7 +20,7 @@ function Ticket({ id, getLabelsElements, hiddenTickets, hideTicket, title, conte
     const keyPressHandler = (e) => {
         if (e.key === 'Enter') {
             const value = e.target.value;
-            addToCurrentLabels(value, labels, id);
+            addNewLabel(value, labels, id);
             setInput("")
         }
 
