@@ -9,7 +9,6 @@ app.use(express.json());
 
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
 
-app.use((request, response, next) => setTimeout(next, 300));
 
 app.get('/', (request, response, next) => {
     response.sendFile('index.html');
@@ -17,8 +16,9 @@ app.get('/', (request, response, next) => {
 
 app.get('/api/tickets', (request, response, next) => {
     let { searchText, labels } = request.query;
-    labels = labels ? labels.slice(1, -1).split(', ') : [''];
-    console.log(Array.from(labels), typeof Array.from(labels));
+    console.log(labels);
+    labels = labels ? labels.split(',') : [''];
+    console.log(labels);
     const searchTextQuery = { title: { $regex: searchText || '', $options: 'i' } }
     const complexQuery = {
         title: {
