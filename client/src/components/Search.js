@@ -2,12 +2,16 @@ import React from 'react';
 import Ticket from './Ticket.js';
 import '../styles/Search.css';
 
-function Search({ getLabelsElements, restoreHiddenTickets, hiddenTickets, tickets, setTickets, filterTickets, hideTicket, updateTicketLabels, labelObjectList, toggleDoneMark }) {
+function Search({ createLabelsElements, restoreHiddenTickets, hiddenTickets, tickets, setTickets, filterTickets, hideChosenTicket, updateTicketLabels, labelObjectList, toggleDoneMark }) {
+
+    // creates all ticket components
     const ticketElements = tickets.map((ticket, index) => {
         return (
-            <Ticket key={index} id={ticket._id || ticket.id} title={ticket.title} done={ticket.done} getLabelsElements={getLabelsElements} content={ticket.content} userEmail={ticket.userEmail} creationTime={ticket.creationTime} labels={ticket.labels} hideTicket={hideTicket} hiddenTickets={hiddenTickets} updateTicketLabels={updateTicketLabels} toggleDoneMark={toggleDoneMark} />
+            <Ticket key={index} id={ticket._id || ticket.id} title={ticket.title} done={ticket.done} createLabelsElements={createLabelsElements} content={ticket.content} userEmail={ticket.userEmail} creationTime={ticket.creationTime} labels={ticket.labels} hideChosenTicket={hideChosenTicket} hiddenTickets={hiddenTickets} updateTicketLabels={updateTicketLabels} toggleDoneMark={toggleDoneMark} />
         )
     });
+
+    // shows hidden tickets counter if exist
     const showHiddenTicketsCounter = () => {
         if (hiddenTickets.length === 0) {
             return "";
@@ -18,11 +22,15 @@ function Search({ getLabelsElements, restoreHiddenTickets, hiddenTickets, ticket
             </p>
         );
     }
+
+    // convert labels object to label-names array
     const labelList = labelObjectList.map((labelObject) => {
         return labelObject.name;
     });
-    const labelElements = <div id="label-list">
-        {getLabelsElements(labelList)}
+
+    // creates a div with ticket labels
+    const labelElementsDiv = <div id="label-list">
+        {createLabelsElements(labelList)}
     </div>
 
     return (
@@ -30,7 +38,7 @@ function Search({ getLabelsElements, restoreHiddenTickets, hiddenTickets, ticket
             <input id="searchInput" type="text" placeholder="Search" onChange={filterTickets} />
             {showHiddenTicketsCounter()}
             <br />
-            {labelElements}
+            {labelElementsDiv}
             <div id="tickets-container">
                 {ticketElements}
             </div>

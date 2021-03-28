@@ -17,7 +17,6 @@
     .ticket-content {
         width: 15rem;
         word-wrap: break-word;
-        // background-color: black;
     }
 }
 
@@ -36,7 +35,7 @@
     width: 90%;
     display: flex;
     flex-wrap: wrap;
-    // margin: 0.7rem -1rem 1rem -1rem;
+    margin: 0.7rem 0 0.6rem 0;
 }
 
 .label-span {
@@ -103,7 +102,7 @@
 }
 
 .more{
-width: 80%;
+    width: 80%;
     .ticket-labels{
         margin-top:0.3rem;
         justify-content:center;
