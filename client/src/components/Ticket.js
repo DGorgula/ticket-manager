@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 import '../styles/Ticket.css';
 
-function Ticket({ id, getLabelsElements, hiddenTickets, hideTicket, title, content, userEmail, creationTime, labels, updateTicketLabels }) {
+function Ticket({ id, getLabelsElements, hiddenTickets, hideTicket, title, content, userEmail, creationTime, labels, updateTicketLabels, }) {
     const shortContent = content.slice(0, 120);
     const [ticketContent, setContent] = useState(shortContent)
     const [input, setInput] = useState("")
+    const [more, setMore] = useState("")
 
 
     const prettifiedDate = (creationTime) => {
         return new Date(creationTime).toISOString().slice(0, 19).replace("T", " ");
     }
-    const showMore = <span id="show" onClick={() => setContent(content)}> show more</span>;
+    const showMore = <span id="show" onClick={() => { setContent(content); setMore(" more"); }}> show more</span>;
     const showLess = <span id="show" onClick={() => setContent(shortContent)}> show less</span>;
 
     if (hiddenTickets.includes(id)) {
@@ -29,7 +30,7 @@ function Ticket({ id, getLabelsElements, hiddenTickets, hideTicket, title, conte
     const ticketContentCreator = () => {
         if (ticketContent === content) {
             return (
-                <p className="ticket-content">{ticketContent}<br />{showLess}</p>
+                <p className="ticket-content">{ticketContent}</p>
             )
         }
         return (
@@ -47,10 +48,32 @@ function Ticket({ id, getLabelsElements, hiddenTickets, hideTicket, title, conte
         console.log(parent);
         setInput(< input className="label-adder-input" placeholder="add new label" autoFocus onBlur={() => setInput("")} onKeyPress={keyPressHandler} style={{ left: leftPosition - parentLeft + 10, top: topPosition - parentTop - 20 }} />)
     }
+    if (more) {
+        return (
+            <div id="more-background">
 
+                <div className={`ticket${more}`}>
+                    <div className="ticket-header">
+                        <span className="close-ticket-button" onClick={() => { setMore(""); setContent(shortContent) }}>x</span>
+                        <img className="hideTicketButton" src='./assets/hide.webp' onClick={() => hideTicket(id)} />
+                        <span className="creation-time">{prettifiedDate(creationTime)}</span>
+                        <h3 className="ticket-title">{title}</h3>
+                        <span className="user-email">{userEmail}</span>
+                    </div>
+                    <div className="ticket-labels">{getLabelsElements(labels, true, id)}
+                        <img className="label-adder" src="./assets/plus.png" onClick={showInput} />
+                        {input}
+
+                    </div>
+                    {ticketContentCreator()}
+                </div >
+            </div>
+        )
+    }
     return (
-        <div className="ticket">
+        <div className={`ticket${more}`}>
             <div className="ticket-header">
+                <span className="close-ticket-button" onClick={() => { setMore(""); setContent(shortContent) }}>x</span>
                 <img className="hideTicketButton" src='./assets/hide.webp' onClick={() => hideTicket(id)} />
                 <span className="creation-time">{prettifiedDate(creationTime)}</span>
                 <h3 className="ticket-title">{title}</h3>
@@ -61,8 +84,9 @@ function Ticket({ id, getLabelsElements, hiddenTickets, hideTicket, title, conte
                 {input}
 
             </div>
-            {ticketContentCreator()}
-        </div>
+            { ticketContentCreator()}
+        </div >
+
     )
 
 }

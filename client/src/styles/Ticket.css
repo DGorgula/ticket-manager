@@ -32,7 +32,7 @@
   word-wrap: break-word;
 }
 
-.ticket:hover .hideTicketButton, .ticket:hover .creation-time {
+.ticket:hover .hideTicketButton, .ticket:hover .creation-time, .ticket:hover .close-ticket-button {
   opacity: 0.5;
 }
 
@@ -93,6 +93,10 @@
   opacity: 0;
 }
 
+.close-ticket-button {
+  display: none;
+}
+
 .creation-time {
   position: absolute;
   left: 1rem;
@@ -104,5 +108,62 @@
 #show {
   font-weight: bold;
   font-size: 0.8rem;
+}
+
+.more {
+  width: 80%;
+}
+
+.more .ticket-labels {
+  margin-top: 0.3rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.more .ticket-title {
+  width: 100%;
+}
+
+.more .ticket-content {
+  width: 90%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  max-height: 63vh;
+  overflow-y: scroll;
+}
+
+.more .close-ticket-button {
+  display: block;
+  position: absolute;
+  font-size: 1.3rem;
+  right: 1.2rem;
+  top: 0.25rem;
+  opacity: 0;
+}
+
+.more .hideTicketButton {
+  right: 2.5rem;
+}
+
+#more-background {
+  position: fixed;
+  padding-top: 1.1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  place-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1;
 }
 /*# sourceMappingURL=Ticket.css.map */

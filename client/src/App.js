@@ -12,6 +12,7 @@ function App() {
   const [currentLabels, setCurrentLabels] = useState([]);
   const [inputValueState, setInputValue] = useState("");
 
+
   const getLabelsFromServer = () => {
     axios.get('/api/labels')
       .then(({ data: allLabelObjects }) => {
