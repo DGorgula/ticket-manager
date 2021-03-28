@@ -22,7 +22,7 @@
 }
 
 .ticket:hover {
-    .hideTicketButton, .creation-time{
+    .hideTicketButton, .creation-time, .close-ticket-button{
         opacity: 0.5;
     }
 }
@@ -73,7 +73,9 @@ box-shadow: -6px 4px 12px -3px rgba(0,0,0,0.29);
     width:1.2rem;
     opacity: 0;
 }
-
+.close-ticket-button{
+    display: none;
+}
 .creation-time{
     position: absolute;
     left: 1rem;
@@ -84,4 +86,46 @@ box-shadow: -6px 4px 12px -3px rgba(0,0,0,0.29);
 #show{
     font-weight: bold;
     font-size: 0.8rem;
+}
+
+.more{
+width: 80%;
+    .ticket-labels{
+        margin-top:0.3rem;
+        justify-content:center;
+    }
+.ticket-title{
+    width:100%;
+}
+.ticket-content{
+    width:90%;
+    height: fit-content;
+    max-height: 63vh;
+    overflow-y: scroll;
+}
+.close-ticket-button{
+    display: block;
+    position: absolute;
+    font-size: 1.3rem;
+    right: 1.2rem;
+    top:0.25rem;
+    opacity: 0;
+}
+.hideTicketButton {
+    right: 2.5rem;
+}
+}
+
+#more-background{
+    position:fixed;
+    padding-top: 1.1rem;
+    display:flex;
+    place-items: center;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+    height: 100%;
+    top: 0;
+    background-color: rgba(0,0,0, 0.6);
+    z-index:1;
 }
