@@ -85,6 +85,8 @@
 
 .label-deleter {
   opacity: 0.5;
+  margin: 0 0.1rem 0 0.2rem;
+  padding-bottom: 1rem;
 }
 
 .user-email {
