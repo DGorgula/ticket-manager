@@ -145,6 +145,21 @@ function App() {
     return newLabel.color;
   }
 
+  const toggleDoneMark = (ticketId, isDone) => {
+    if (isDone) {
+      axios.patch(`/api/tickets/${ticketId}/undone`)
+        .then(response => {
+          filterTickets(null, inputValueState);
+        })
+        .catch(error => console.log("error marking as undone", error))
+      return;
+    }
+    axios.patch(`/api/tickets/${ticketId}/done`)
+      .then(response => {
+        filterTickets(null, inputValueState);
+      })
+      .catch(error => console.log("error marking as done", error))
+  }
 
   const updateTicketLabels = (e, label, labels, id, addFlag) => {
     console.log(e, label, labels, id, addFlag);
@@ -188,7 +203,7 @@ function App() {
     <>
       <div className="App">
         <h1 className="title">Your Ticket Manager</h1>
-        <Search tickets={ticketsState} setTickets={setTickets} filterTickets={filterTickets} hideTicket={hideTicket} hiddenTickets={hiddenTickets} restoreHiddenTickets={restoreHiddenTickets} getLabelsElements={getLabelsElements} updateTicketLabels={updateTicketLabels} labelObjectList={labelObjectList} />
+        <Search tickets={ticketsState} setTickets={setTickets} filterTickets={filterTickets} hideTicket={hideTicket} hiddenTickets={hiddenTickets} restoreHiddenTickets={restoreHiddenTickets} getLabelsElements={getLabelsElements} updateTicketLabels={updateTicketLabels} labelObjectList={labelObjectList} toggleDoneMark={toggleDoneMark} />
       </div>
       <div id="oopsy-loader">
         <img id="zzz-loader" src="./assets/zzz.png" />

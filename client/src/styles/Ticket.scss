@@ -22,10 +22,15 @@
 }
 
 .ticket:hover {
-    .hideTicketButton, .creation-time, .close-ticket-button{
+    .hideTicketButton, .creation-time, .close-ticket-button, .ticket-done-button{
         opacity: 0.5;
     }
+    .done{
+        opacity: 1;
+    }
 }
+
+
 .ticket-labels {
     position: relative;
     width: 90%;
@@ -55,9 +60,9 @@
     opacity: 0.5;
 }
 .label-adder-input{
-position: absolute;
-width:6rem;
-box-shadow: -6px 4px 12px -3px rgba(0,0,0,0.29);
+    position: absolute;
+    width:6rem;
+    box-shadow: -6px 4px 12px -3px rgba(0,0,0,0.29);
 }
 .label-deleter{
     opacity:0.5;
@@ -76,9 +81,18 @@ box-shadow: -6px 4px 12px -3px rgba(0,0,0,0.29);
 .close-ticket-button{
     display: none;
 }
+.ticket-done-button{
+    position: absolute;
+    left: 0.6rem;
+    margin-top: -0.3rem;
+    opacity: 0;
+}
+.done{
+    opacity: 1;
+}
 .creation-time{
     position: absolute;
-    left: 1rem;
+    left: 2.5rem;
     font-size: 0.8rem;
     margin-top: 0.25rem;
     opacity: 0;
@@ -114,6 +128,7 @@ width: 80%;
 .hideTicketButton {
     right: 2.5rem;
 }
+
 }
 
 #more-background{
