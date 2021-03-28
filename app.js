@@ -61,11 +61,23 @@ app.patch('/api/tickets/:ticketId/undone', async (request, response, next) => {
     }
 });
 
-app.patch('/api/tickets/new-label', async (request, response, next) => {
+app.patch('/api/tickets/update-labels', async (request, response, next) => {
     try {
         const { id, labels } = request.body;
         const updatedTicket = await Ticket.findByIdAndUpdate(id, { labels: labels }, { new: true })
         return response.json({ updated: true })
+    }
+    catch (error) {
+        return next(error);
+    }
+});
+
+app.delete('/api/labels/remove/:labelName', async (request, response, next) => {
+    try {
+        const { labelName } = request.params;
+        const ticketUpdateResponse = await Ticket.updateMany({ labels: labelName }, { $pullAll: { labels: [labelName] } }, { new: true });
+        const labelUpdateResponse = await Label.deleteOne({ name: labelName });
+        return response.json({ updated: ticketUpdateResponse.nModified })
     }
     catch (error) {
         return next(error);
