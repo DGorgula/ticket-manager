@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import '../styles/Ticket.css';
 
-function Ticket({ id, getLabelsElements, hiddenTickets, hideTicket, title, content, userEmail, creationTime, labels, addNewLabel }) {
+function Ticket({ id, getLabelsElements, hiddenTickets, hideTicket, title, content, userEmail, creationTime, labels, updateTicketLabels }) {
     const shortContent = content.slice(0, 120);
     const [ticketContent, setContent] = useState(shortContent)
     const [input, setInput] = useState("")
@@ -20,7 +20,7 @@ function Ticket({ id, getLabelsElements, hiddenTickets, hideTicket, title, conte
     const keyPressHandler = (e) => {
         if (e.key === 'Enter') {
             const value = e.target.value;
-            addNewLabel(value, labels, id);
+            updateTicketLabels(e, value, labels, id, true);
             setInput("")
         }
 
@@ -56,7 +56,7 @@ function Ticket({ id, getLabelsElements, hiddenTickets, hideTicket, title, conte
                 <h3 className="ticket-title">{title}</h3>
                 <span className="user-email">{userEmail}</span>
             </div>
-            <div className="ticket-labels">{getLabelsElements(labels, true)}
+            <div className="ticket-labels">{getLabelsElements(labels, true, id)}
                 <img className="label-adder" src="./assets/plus.png" onClick={showInput} />
                 {input}
 

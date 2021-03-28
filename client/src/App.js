@@ -10,12 +10,17 @@ function App() {
   const [hiddenTickets, setHiddenTickets] = useState([]);
   const [labelObjectList, setlabelObjectList] = useState([]);
   const [currentLabels, setCurrentLabels] = useState([]);
-  const [inputValueState, setInputValue] = useState("")
-  useEffect(() => {
+  const [inputValueState, setInputValue] = useState("");
+
+  const getLabelsFromServer = () => {
     axios.get('/api/labels')
       .then(({ data: allLabelObjects }) => {
         console.log(allLabelObjects);
-        setlabelObjectList(allLabelObjects);
+        filterTickets(null, inputValueState)
+          .then(result => {
+            setlabelObjectList(allLabelObjects);
+          })
+          .catch(err => { console.log(err); })
       })
       .catch(err => {
         return
@@ -24,30 +29,40 @@ function App() {
         // }
         console.log("error to load labels");
       })
+  }
+
+  useEffect(() => {
+    getLabelsFromServer();
   }, [])
 
 
-  const filterTickets = (event, value) => {
-    let inputValue;
-    if (value != null) {
-      inputValue = value;
-    }
-    else {
-      inputValue = event.target.value;
-    }
-    setInputValue(inputValue);
-    axios.get(`/api/tickets?searchText=${inputValue}&labels=${currentLabels}`)
-      .then(({ data: filteredTickets }) => {
-        if ("error" in filteredTickets) {
-          console.log("there was an error");
-          return;
-        }
-        return setTickets(filteredTickets)
-      })
-      .catch(err => {
-        return setServerErrorPage(true)
-      })
+  function filterTickets(event, value) {
+    return new Promise((resolve, reject) => {
+
+      let inputValue;
+      if (value != null) {
+        inputValue = value;
+      }
+      else {
+        inputValue = event.target.value;
+      }
+      setInputValue(inputValue);
+      axios.get(`/api/tickets?searchText=${inputValue}&labels=${currentLabels}`)
+        .then(({ data: filteredTickets }) => {
+          if ("error" in filteredTickets) {
+            reject("there was an error");
+          }
+          setTickets(filteredTickets);
+          resolve();
+        })
+        .catch(err => {
+          setServerErrorPage(true)
+          reject();
+        })
+    })
   }
+
+
   useEffect(() => {
     filterTickets(null, inputValueState);
   }, [currentLabels])
@@ -76,7 +91,16 @@ function App() {
     setCurrentLabels([...currentLabels, label])
   }
 
-  const getLabelsElements = (labels, isTicketLabel) => {
+  const removeLabelFromAll = (e, label) => {
+    e.stopPropagation();
+    axios.delete(`/api/labels/remove/${label}`)
+      .then(result => {
+        getLabelsFromServer();
+      })
+      .catch(err => { console.log(err); })
+  }
+
+  const getLabelsElements = (labels, isTicketLabel, ticketId) => {
     if (!labels) {
       return "";
     }
@@ -87,9 +111,15 @@ function App() {
     return labels.map((label, index) => {
       const isChosen = currentLabels.includes(label);
       const labelBackgroundColor = chosenExist ? (isChosen ? getLabelBackroundColor(label) : 'lightgray') : getLabelBackroundColor(label);
-
       return (
-        <span key={index} className={`label`} onClick={() => { toggleLabelChoose(label); console.log(currentLabels) }} style={{ backgroundColor: isTicketLabel ? getLabelBackroundColor(label) : labelBackgroundColor }}>{label}</span>
+        <span key={index} className={`label-span`} onClick={() => { toggleLabelChoose(label); console.log(currentLabels) }} style={{ backgroundColor: isTicketLabel ? getLabelBackroundColor(label) : labelBackgroundColor }}><span className='label'>{label}</span> <span className="label-deleter" onClick={(e) => {
+          if (isTicketLabel) {
+            updateTicketLabels(e, label, labels, ticketId)
+          }
+          else {
+            removeLabelFromAll(e, label)
+          }
+        }}>x</span></span>
       );
     });
   }
@@ -115,14 +145,25 @@ function App() {
   }
 
 
-  const addNewLabel = (label, labels, id) => {
-    axios.patch('/api/tickets/new-label', { labels: labels, id: id }).then(({ data: response }) => {
+  const updateTicketLabels = (e, label, labels, id, addFlag) => {
+    console.log(e, label, labels, id, addFlag);
+    e.stopPropagation();
+
+    if (addFlag) {
+      labels.push(label)
+    }
+    else {
+      const labelIndex = labels.indexOf(label);
+      labels.splice(labelIndex, 1);
+      console.log(labels);
+    }
+    axios.patch('/api/tickets/update-labels', { labels: labels, id: id }).then(({ data: response }) => {
       if (response.label) {
+        labels.pop();
         labels.push(response.label)
         setTickets([...ticketsState]);
         return;
       }
-      labels.push(label)
       setTickets([...ticketsState]);
       return;
     }).catch((err) => { console.log("error updating new label"); })
@@ -146,7 +187,7 @@ function App() {
     <>
       <div className="App">
         <h1 className="title">Your Ticket Manager</h1>
-        <Search tickets={ticketsState} setTickets={setTickets} filterTickets={filterTickets} hideTicket={hideTicket} hiddenTickets={hiddenTickets} restoreHiddenTickets={restoreHiddenTickets} getLabelsElements={getLabelsElements} addNewLabel={addNewLabel} labelObjectList={labelObjectList} />
+        <Search tickets={ticketsState} setTickets={setTickets} filterTickets={filterTickets} hideTicket={hideTicket} hiddenTickets={hiddenTickets} restoreHiddenTickets={restoreHiddenTickets} getLabelsElements={getLabelsElements} updateTicketLabels={updateTicketLabels} labelObjectList={labelObjectList} />
       </div>
       <div id="oopsy-loader">
         <img id="zzz-loader" src="./assets/zzz.png" />
