@@ -32,8 +32,12 @@
   word-wrap: break-word;
 }
 
-.ticket:hover .hideTicketButton, .ticket:hover .creation-time, .ticket:hover .close-ticket-button {
+.ticket:hover .hideTicketButton, .ticket:hover .creation-time, .ticket:hover .close-ticket-button, .ticket:hover .ticket-done-button {
   opacity: 0.5;
+}
+
+.ticket:hover .done {
+  opacity: 1;
 }
 
 .ticket-labels {
@@ -97,9 +101,20 @@
   display: none;
 }
 
+.ticket-done-button {
+  position: absolute;
+  left: 0.6rem;
+  margin-top: -0.3rem;
+  opacity: 0;
+}
+
+.done {
+  opacity: 1;
+}
+
 .creation-time {
   position: absolute;
-  left: 1rem;
+  left: 2.5rem;
   font-size: 0.8rem;
   margin-top: 0.25rem;
   opacity: 0;

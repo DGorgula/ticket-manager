@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import '../styles/Ticket.css';
 
-function Ticket({ id, getLabelsElements, hiddenTickets, hideTicket, title, content, userEmail, creationTime, labels, updateTicketLabels, }) {
+function Ticket({ id, done, getLabelsElements, hiddenTickets, hideTicket, title, content, userEmail, creationTime, labels, updateTicketLabels, toggleDoneMark }) {
     const shortContent = content.slice(0, 120);
     const [ticketContent, setContent] = useState(shortContent)
     const [input, setInput] = useState("")
@@ -48,12 +48,29 @@ function Ticket({ id, getLabelsElements, hiddenTickets, hideTicket, title, conte
         console.log(parent);
         setInput(< input className="label-adder-input" placeholder="add new label" autoFocus onBlur={() => setInput("")} onKeyPress={keyPressHandler} style={{ left: leftPosition - parentLeft + 10, top: topPosition - parentTop - 20 }} />)
     }
+
+    const showDone = () => {
+        if (done) {
+            return (
+                <svg className="ticket-done-button done" onClick={() => { toggleDoneMark(id, true) }} xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                </svg>
+            )
+        }
+        return (
+            <svg className="ticket-done-button" onClick={() => { toggleDoneMark(id, false) }} xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+            </svg>
+        );
+    }
     if (more) {
         return (
-            <div id="more-background">
+            <div id="more-background" onClick={() => { setMore(""); setContent(shortContent) }}>
 
-                <div className={`ticket${more}`}>
+                <div className={`ticket${more}`} onClick={(e) => e.stopPropagation()}>
                     <div className="ticket-header">
+                        {showDone()}
+
                         <span className="close-ticket-button" onClick={() => { setMore(""); setContent(shortContent) }}>x</span>
                         <img className="hideTicketButton" src='./assets/hide.webp' onClick={() => hideTicket(id)} />
                         <span className="creation-time">{prettifiedDate(creationTime)}</span>
@@ -67,12 +84,13 @@ function Ticket({ id, getLabelsElements, hiddenTickets, hideTicket, title, conte
                     </div>
                     {ticketContentCreator()}
                 </div >
-            </div>
+            </div >
         )
     }
     return (
-        <div className={`ticket${more}`}>
+        <div className={`ticket${more}`} onDoubleClick={() => { setContent(content); setMore(" more"); }}>
             <div className="ticket-header">
+                {showDone()}
                 <span className="close-ticket-button" onClick={() => { setMore(""); setContent(shortContent) }}>x</span>
                 <img className="hideTicketButton" src='./assets/hide.webp' onClick={() => hideTicket(id)} />
                 <span className="creation-time">{prettifiedDate(creationTime)}</span>
