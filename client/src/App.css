@@ -74,12 +74,10 @@
 
 #server-error #server-error-images #zzz {
   position: absolute;
-  margin-top: -9rem;
-  margin-right: -5rem;
-  -webkit-transform: rotate(10deg);
-          transform: rotate(10deg);
-  -webkit-transform: scale(0.6);
-          transform: scale(0.6);
+  margin-top: -180px;
+  margin-right: -120px;
+  -webkit-transform: scale(0.6) rotate(10deg);
+          transform: scale(0.6) rotate(10deg);
 }
 
 #oopsy-loader {
