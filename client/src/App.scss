@@ -42,14 +42,14 @@
         flex-direction: row-reverse;
         height: fit-content;
         #foxy {
-            scale: 0.75;
+            transform: scale(.75);
         }
         #zzz{
             position: absolute;
-            scale: 0.6;
             margin-top: -9rem;
             margin-right: -5rem;
             transform: rotate(10deg);
+            transform: scale(.6);
         }
     }
     
