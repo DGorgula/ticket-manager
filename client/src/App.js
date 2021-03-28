@@ -14,15 +14,15 @@ function App() {
   const [inputValueState, setInputValue] = useState("");
 
 
-  // first data http requests in componentDidMount
+  // first http request in componentDidMount
   useEffect(() => {
     getLabelsFromServer();
-    filterTickets(null, inputValueState);
   }, [])
 
   // http request to update tickets when labels are chosed.
   useEffect(() => {
-    filterTickets(null, inputValueState);
+    filterTickets(null, inputValueState)
+      .catch((err) => { console.error("didnt manage to get tickets") });
   }, [chosenLabels])
 
 
@@ -162,14 +162,16 @@ function App() {
     if (isDone) {
       axios.patch(`/api/tickets/${ticketId}/undone`)
         .then(response => {
-          filterTickets(null, inputValueState);
+          filterTickets(null, inputValueState)
+            .catch((err) => { console.error("didnt manage to get tickets") });
         })
         .catch(error => console.log("error marking as undone", error))
       return;
     }
     axios.patch(`/api/tickets/${ticketId}/done`)
       .then(response => {
-        filterTickets(null, inputValueState);
+        filterTickets(null, inputValueState)
+          .catch((err) => { console.error("didnt manage to get tickets") });
       })
       .catch(error => console.log("error marking as done", error))
   }
