@@ -2,7 +2,7 @@ import React from 'react';
 import Ticket from '../Ticket/Ticket';
 import './Search.css';
 
-function Search({ createLabelsElements, restoreHiddenTickets, hiddenTickets, tickets, setTickets, filterTickets, hideChosenTicket, updateTicketLabels, labelObjectList, toggleDoneMark }) {
+function Search({ createLabelsElements, restoreHiddenTickets, hiddenTickets, tickets, filterTickets, hideChosenTicket, updateTicketLabels, labelObjectList, toggleDoneMark }) {
 
     // creates all ticket components
     const ticketElements = tickets.map((ticket, index) => {
