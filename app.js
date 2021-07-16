@@ -14,6 +14,10 @@ app.get('/', (request, response, next) => {
     response.sendFile('index.html');
 })
 
+app.get('/bla', (request, response, next) => {
+    response.send('index.sagdfghtml');
+})
+
 app.get('/api/tickets', (request, response, next) => {
     let { searchText, labels } = request.query;
     console.log(labels);

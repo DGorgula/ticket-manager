@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import randomColor from 'randomcolor';
-import Search from './components/Search.js'
-import Label from './components/Label.js'
+import Search from '../components/Search/Search'
+import Label from '../components/Label/Label'
 import "./App.css";
 
 function App() {

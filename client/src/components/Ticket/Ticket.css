@@ -32,23 +32,32 @@
   word-wrap: break-word;
 }
 
-.ticket:hover .hideTicketButton, .ticket:hover .creation-time, .ticket:hover .close-ticket-button, .ticket:hover .ticket-done-button {
-  opacity: 0.5;
-}
-
-.ticket:hover .done {
-  opacity: 1;
-}
-
-.ticket-labels {
+.ticket .ticket-labels {
   position: relative;
   width: 90%;
+  height: 1.5rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   margin: 0.7rem 0 0.6rem 0;
+}
+
+.ticket:hover .creation-time {
+  opacity: 0.5;
+}
+
+.ticket:hover .hideTicketButton, .ticket:hover .close-ticket-button, .ticket:hover .ticket-done-button {
+  opacity: 0.5;
+}
+
+.ticket:hover .hideTicketButton:hover, .ticket:hover .close-ticket-button:hover, .ticket:hover .ticket-done-button:hover {
+  opacity: 1;
+}
+
+.ticket:hover .done {
+  opacity: 1;
 }
 
 .label-span {
@@ -64,16 +73,26 @@
   margin-bottom: 0.2rem;
   -webkit-box-shadow: 0px 0px 15px -3px rgba(0, 0, 0, 0.29);
           box-shadow: 0px 0px 15px -3px rgba(0, 0, 0, 0.29);
+  cursor: pointer;
+}
+
+.label-span:hover {
+  font-size: 0.7rem;
 }
 
 .label-adder {
-  border: 0.15rem dashed black;
+  border: 1px dashed black;
   vertical-align: middle;
   text-align: center;
   border-radius: 0.3rem;
   width: 1rem;
   height: 1rem;
   opacity: 0.5;
+  cursor: pointer;
+}
+
+.label-adder:hover {
+  opacity: 1;
 }
 
 .label-adder-input {
@@ -89,6 +108,10 @@
   padding-bottom: 1rem;
 }
 
+.label-deleter:hover {
+  opacity: 1;
+}
+
 .user-email {
   font-size: 0.6rem;
 }
@@ -98,10 +121,12 @@
   right: 1rem;
   width: 1.2rem;
   opacity: 0;
+  cursor: pointer;
 }
 
 .close-ticket-button {
   display: none;
+  cursor: pointer;
 }
 
 .ticket-done-button {
@@ -109,6 +134,7 @@
   left: 0.6rem;
   margin-top: -0.3rem;
   opacity: 0;
+  cursor: pointer;
 }
 
 .done {
@@ -126,6 +152,7 @@
 #show {
   font-weight: bold;
   font-size: 0.8rem;
+  cursor: pointer;
 }
 
 .more {

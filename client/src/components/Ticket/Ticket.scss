@@ -18,25 +18,34 @@
         width: 15rem;
         word-wrap: break-word;
     }
+    .ticket-labels {
+        position: relative;
+        width: 90%;
+        height: 1.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0.7rem 0 0.6rem 0;
+    }
 }
 
 .ticket:hover {
-    .hideTicketButton, .creation-time, .close-ticket-button, .ticket-done-button{
+    .creation-time {
         opacity: 0.5;
+    }
+    .hideTicketButton, .close-ticket-button, .ticket-done-button{
+        opacity: 0.5;
+        &:hover{
+            opacity: 1;
+        }
     }
     .done{
         opacity: 1;
     }
+    
 }
 
 
-.ticket-labels {
-    position: relative;
-    width: 90%;
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0.7rem 0 0.6rem 0;
-}
+
 
 .label-span {
     height:fit-content;
@@ -48,15 +57,23 @@
     margin-right: 0.2rem;
     margin-bottom: 0.2rem;
     box-shadow: 0px 0px 15px -3px rgba(0, 0, 0, 0.29);
+    cursor: pointer;
+    &:hover{
+        font-size: 0.7rem;
+    }
 }
 .label-adder{
-    border: 0.15rem dashed black;
+    border: 1px dashed black;
     vertical-align: middle;
     text-align:center;
     border-radius: 0.3rem;
     width: 1rem;
     height: 1rem;
     opacity: 0.5;
+    cursor: pointer;
+    &:hover{
+        opacity: 1;
+    }
 }
 .label-adder-input{
     position: absolute;
@@ -67,6 +84,10 @@
     opacity:0.5;
     margin: 0 0.1rem 0 0.2rem;
     padding-bottom: 1rem;
+    &:hover{
+        opacity: 1;
+    }
+
 }
 
 .user-email{
@@ -78,19 +99,23 @@
     right: 1rem;
     width:1.2rem;
     opacity: 0;
+    cursor: pointer;
 }
 .close-ticket-button{
     display: none;
+    cursor: pointer;
 }
 .ticket-done-button{
     position: absolute;
     left: 0.6rem;
     margin-top: -0.3rem;
     opacity: 0;
+    cursor: pointer;
 }
 .done{
     opacity: 1;
 }
+
 .creation-time{
     position: absolute;
     left: 2.5rem;
@@ -101,6 +126,7 @@
 #show{
     font-weight: bold;
     font-size: 0.8rem;
+    cursor: pointer;
 }
 
 .more{
@@ -109,27 +135,26 @@
         margin-top:0.3rem;
         justify-content:center;
     }
-.ticket-title{
-    width:100%;
-}
-.ticket-content{
-    width:90%;
-    height: fit-content;
-    max-height: 63vh;
-    overflow-y: scroll;
-}
-.close-ticket-button{
-    display: block;
-    position: absolute;
-    font-size: 1.3rem;
-    right: 1.2rem;
-    top:0.25rem;
-    opacity: 0;
-}
-.hideTicketButton {
-    right: 2.5rem;
-}
-
+    .ticket-title{
+        width:100%;
+    }
+    .ticket-content{
+        width:90%;
+        height: fit-content;
+        max-height: 63vh;
+        overflow-y: scroll;
+    }
+    .close-ticket-button{
+        display: block;
+        position: absolute;
+        font-size: 1.3rem;
+        right: 1.2rem;
+        top:0.25rem;
+        opacity: 0;
+    }
+    .hideTicketButton {
+        right: 2.5rem;
+    }
 }
 
 #more-background{

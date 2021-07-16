@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import '../styles/Ticket.css';
+import './Ticket.css';
 
 function Ticket({ id, done, createLabelsElements, hiddenTickets, hideChosenTicket, title, content, userEmail, creationTime, labels, updateTicketLabels, toggleDoneMark }) {
     const shortContent = content.slice(0, 120);
@@ -107,7 +107,7 @@ function Ticket({ id, done, createLabelsElements, hiddenTickets, hideChosenTicke
                 {input}
 
             </div>
-            { ticketContent()}
+            {ticketContent()}
         </div >
 
     )

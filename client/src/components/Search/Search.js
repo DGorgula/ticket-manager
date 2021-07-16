@@ -1,6 +1,6 @@
 import React from 'react';
-import Ticket from './Ticket.js';
-import '../styles/Search.css';
+import Ticket from '../Ticket/Ticket';
+import './Search.css';
 
 function Search({ createLabelsElements, restoreHiddenTickets, hiddenTickets, tickets, setTickets, filterTickets, hideChosenTicket, updateTicketLabels, labelObjectList, toggleDoneMark }) {
 
